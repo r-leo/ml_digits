@@ -6,7 +6,9 @@ import base64
 from joblib import load
 from numpy import array
 from random import randrange
+import os
 
+THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 
 app = Flask(__name__)
 
@@ -78,15 +80,17 @@ def procesar():
     # Poner sobre fondo blanco y eliminar transparencia:
     imw = Image.new("RGBA", im.size, "WHITE")
     imw.paste(im, (0, 0), im)
+    imw = imw.convert('RGB')
 
     # Generar id:
     id = randrange(1000, 9999)
 
     # Guardar:
-    imw.convert('RGB').save(f'static/generated/out{id}.jpg', "JPEG")
+    imw_url = url_for('static', filename=f'generated/out{id}.jpg')
+    imw.save(os.path.join(THIS_FOLDER, f'static/generated/out{id}.jpg'), "JPEG")
 
     # Cargar modelo entrenado:
-    ensamble = load('ensamble.joblib')
+    ensamble = load(os.path.join(THIS_FOLDER, 'ensamble.joblib'))
 
     # Transformar mapa de bits en array de numpy:
     x = [obs for fila in bitmap_norm for obs in fila]
@@ -98,10 +102,7 @@ def procesar():
     return render_template(
     'resultado.html',
     estilo = url_for('static', filename = 'estilo.css'),
-    imagen = url_for('static', filename = f'generated/out{id}.jpg'),
+    imagen = imw_url,
     array = bitmap_norm,
     estimador = str(prediccion)
     )
-
-if __name__ == "__main__":
-    app.run(debug=True)
