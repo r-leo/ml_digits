@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
     <title>Interfaz ML - Rodrigo Leo</title>
   <link rel="stylesheet" href="{{ estilo }}">
   </head>
@@ -10,7 +11,7 @@
 
     <h2>Entrada</h2>
 
-    <p>Dibuja un dígito manuscrito (del cero al nueve) en el siguiente recuadro. Cuando presiones "Procesar", la imagen se traducirá en una matriz de píxeles para ser interpretada por el algoritmo de ensamble que programamos.</p>
+    <p>Escribe un dígito (del cero al nueve) en el recuadro. Al presionar "Procesar", la imagen se traducirá en una matriz de píxeles para ser interpretada por el ensamble que programamos.</p>
 
     <div id="container" class="container">
       <canvas id="drawing-area" class="drawing-area" height="100" width="100"></canvas>
@@ -20,8 +21,8 @@
       </div>
     </div>
 
-    <script src="{{ codigo }}"></script>
     <script src="{{ jquery }}"></script>
+    <script src="{{ codigo }}"></script>
     <script src="{{ redirect }}"></script>
 
   </body>

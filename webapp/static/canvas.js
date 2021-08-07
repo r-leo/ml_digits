@@ -9,7 +9,7 @@ const state = {
   mousedown: false
 };
 
-const width = window.innerWidth
+const width = $(document).width();
 
 if (width > 500) {
   canvas.width  = 400;
