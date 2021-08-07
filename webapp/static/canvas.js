@@ -112,6 +112,8 @@ function procesar() {
     console.log('<canvas> vacío.');
   }
   else {
+    $('#container').children().hide();
+    $('#cargando').css('display', 'flex');
     $.redirect('/procesar', {
       'img': canvas.toDataURL(),
       'l': bbox.left,
